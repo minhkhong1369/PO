@@ -1,0 +1,12 @@
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\bin\Debug\PTHOrder.exe
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\bin\Debug\PTHOrder.pdb
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.Properties.Resources.resources
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.csproj.GenerateResource.Cache
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.exe.licenses
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.exe
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.pdb
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.frmMain.resources
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.Forms.frmListSupplier.resources
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.Forms.frmListSupplier_Update.resources
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.Forms.frmListOrder.resources
+D:\Pth_Project\Pth_Order\PTHOrder\PTHOrder\obj\Debug\PTHOrder.Forms.frmListOrder_Update.resources
