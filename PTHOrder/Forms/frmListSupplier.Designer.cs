@@ -254,6 +254,7 @@
             this.gridItem.TabIndex = 0;
             this.gridItem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridItemDetail});
+
             // 
             // frmListSupplier
             // 

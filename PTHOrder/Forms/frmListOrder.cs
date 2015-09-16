@@ -39,7 +39,7 @@ namespace PTHOrder.Forms
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (gridItemDetail.FocusedRowHandle > 0)
+            if (gridItemDetail.FocusedRowHandle > -1)
             {
                 string code = gridItemDetail.GetFocusedRowCellValue(colOrderCode).ToString();
                 Forms.frmListOrder_Update frm = new frmListOrder_Update(code);
@@ -50,7 +50,7 @@ namespace PTHOrder.Forms
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (gridItemDetail.FocusedRowHandle > 0)
+            if (gridItemDetail.FocusedRowHandle > -1)
             {
                 string code = gridItemDetail.GetFocusedRowCellValue(colOrderCode).ToString();
                 Class.clsListOrder cls = new Class.clsListOrder();
@@ -67,5 +67,7 @@ namespace PTHOrder.Forms
 
             }
         }
+
+       
     }
 }

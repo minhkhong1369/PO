@@ -21,7 +21,7 @@ namespace PTHOrder
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
 
              Application.Run(new frmMain());
-           //Application.Run(new Forms.frmListOrder_Update());
+            //Application.Run(new Forms.frmListOrder());
         }
     }
 }

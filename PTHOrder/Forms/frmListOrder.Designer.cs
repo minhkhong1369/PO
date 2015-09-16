@@ -30,10 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListOrder));
-            DevExpress.XtraGrid.GridLevelNode gridLevelNode1 = new DevExpress.XtraGrid.GridLevelNode();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
-            this.bar1 = new DevExpress.XtraBars.Bar();
-            this.bar2 = new DevExpress.XtraBars.Bar();
             this.bar3 = new DevExpress.XtraBars.Bar();
             this.btnAdd = new DevExpress.XtraBars.BarButtonItem();
             this.btnEdit = new DevExpress.XtraBars.BarButtonItem();
@@ -62,8 +59,6 @@
             // barManager1
             // 
             this.barManager1.Bars.AddRange(new DevExpress.XtraBars.Bar[] {
-            this.bar1,
-            this.bar2,
             this.bar3});
             this.barManager1.DockControls.Add(this.barDockControlTop);
             this.barManager1.DockControls.Add(this.barDockControlBottom);
@@ -77,24 +72,6 @@
             this.btnDelete});
             this.barManager1.MaxItemId = 3;
             this.barManager1.StatusBar = this.bar3;
-            // 
-            // bar1
-            // 
-            this.bar1.BarName = "Status Bar";
-            this.bar1.DockCol = 0;
-            this.bar1.DockRow = 0;
-            this.bar1.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar1.OptionsBar.AllowRename = true;
-            this.bar1.Text = "Status Bar";
-            // 
-            // bar2
-            // 
-            this.bar2.BarName = "Custom 2";
-            this.bar2.DockCol = 0;
-            this.bar2.DockRow = 1;
-            this.bar2.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar2.OptionsBar.AllowRename = true;
-            this.bar2.Text = "Custom 2";
             // 
             // bar3
             // 
@@ -142,7 +119,7 @@
             this.barDockControlTop.CausesValidation = false;
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
-            this.barDockControlTop.Size = new System.Drawing.Size(746, 58);
+            this.barDockControlTop.Size = new System.Drawing.Size(746, 0);
             // 
             // barDockControlBottom
             // 
@@ -155,15 +132,15 @@
             // 
             this.barDockControlLeft.CausesValidation = false;
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
-            this.barDockControlLeft.Location = new System.Drawing.Point(0, 58);
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 259);
+            this.barDockControlLeft.Location = new System.Drawing.Point(0, 0);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 317);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(746, 58);
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 259);
+            this.barDockControlRight.Location = new System.Drawing.Point(746, 0);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 317);
             // 
             // imageSmall
             // 
@@ -175,14 +152,12 @@
             // 
             // gridItem
             // 
-            gridLevelNode1.RelationName = "Level1";
-            this.gridItem.LevelTree.Nodes.AddRange(new DevExpress.XtraGrid.GridLevelNode[] {
-            gridLevelNode1});
-            this.gridItem.Location = new System.Drawing.Point(0, -1);
+            this.gridItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridItem.Location = new System.Drawing.Point(0, 0);
             this.gridItem.MainView = this.gridItemDetail;
             this.gridItem.MenuManager = this.barManager1;
             this.gridItem.Name = "gridItem";
-            this.gridItem.Size = new System.Drawing.Size(725, 315);
+            this.gridItem.Size = new System.Drawing.Size(746, 317);
             this.gridItem.TabIndex = 4;
             this.gridItem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridItemDetail});
@@ -200,6 +175,8 @@
             this.colVAT});
             this.gridItemDetail.GridControl = this.gridItem;
             this.gridItemDetail.Name = "gridItemDetail";
+            this.gridItemDetail.OptionsBehavior.Editable = false;
+            this.gridItemDetail.OptionsView.ShowGroupPanel = false;
             // 
             // colOrderCode
             // 
@@ -312,8 +289,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colPlaceOfDelivery;
         private DevExpress.XtraGrid.Columns.GridColumn colPaymentConditions;
         private DevExpress.XtraGrid.Columns.GridColumn colVAT;
-        private DevExpress.XtraBars.Bar bar1;
-        private DevExpress.XtraBars.Bar bar2;
         private DevExpress.XtraBars.Bar bar3;
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnEdit;

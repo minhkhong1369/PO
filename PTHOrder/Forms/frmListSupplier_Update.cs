@@ -44,8 +44,22 @@ namespace PTHOrder.Forms
 
         private void btnSaveNew_Click(object sender, EventArgs e)
         {
-            if (statusForm)
+            //Ran buoc du lieu form
+            if (txtSupplierCode.Text.Trim() == "")
             {
+                MessageBox.Show("Bạn chưa nhập mã nhà cung cấp");
+                txtSupplierCode.Focus();
+                return;
+            }
+            if (txtSupplierName.Text.Trim() == "")
+            {
+                MessageBox.Show("Bạn chưa nhập tên nhà cung cấp");
+                txtSupplierName.Focus();
+                return;
+            }
+            if (statusForm)
+            {      
+                
                 Class.clsListSupplier cls = new Class.clsListSupplier();
                 cls.SupplierCode = txtSupplierCode.Text;
                 cls.SupplierName = txtSupplierName.Text;
@@ -95,8 +109,26 @@ namespace PTHOrder.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+
+                //Ran buoc du lieu form
+                if (txtSupplierCode.Text.Trim() == "")
+                {
+                    MessageBox.Show("Bạn chưa nhập mã nhà cung cấp");
+                    txtSupplierCode.Focus();
+                    return;
+                }
+                if (txtSupplierName.Text.Trim() == "")
+                {
+                    MessageBox.Show("Bạn chưa nhập tên nhà cung cấp");
+                    txtSupplierName.Focus();
+                    return;
+                }
+
             if (statusForm)
             {
+                
+               
+               
                 Class.clsListSupplier cls = new Class.clsListSupplier();
                 cls.SupplierCode = txtSupplierCode.Text;
                 cls.SupplierName = txtSupplierName.Text;
@@ -149,11 +181,16 @@ namespace PTHOrder.Forms
             this.txtTelephone.Text = "";
             this.txtMail.Text = "";
             this.txtGroup.Text = "";
+            this.txtContact.Text = "";
             this.txtNote.Text = "";
             this.txtSupplierCode.Focus();
             statusForm = true;
-        } 
+        }
 
-      
+         
+        
+        
+
+         
     }
 }

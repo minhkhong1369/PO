@@ -17,12 +17,31 @@ namespace PTHOrder.Class
         public string PlaceOfDelivery { get; set; }
         public string PaymentConditions { get; set; }
         public int VAT { get; set; }
+
+        public int OrderDetailCode { get; set; }
+        public string Describe { get; set; }
+        public int Number { get; set; }
+        public string Unit { get; set; }
+        public double Price { get; set; }
+        public double Monetize { get; set; }
+        public string SupplierSuggest { get; set; }
+       
+
         //Store lấy dữ liệu table
         public DataTable tbOrder_GetList()
         {
             string procname = "tbOrder_GetList";
             DbAccess db = new DbAccess();
             db.CreateNewSqlCommand();
+            return db.ExecuteDataTable(procname);
+        }
+        //Store lấy dữ liệu table 
+        public DataTable tbOrderDetails_GetByCode()
+        {
+            string procname = "tbOrderDetails_GetByCode";
+            DbAccess db = new DbAccess();
+            db.CreateNewSqlCommand();
+            db.AddParameter("@OrderCode", OrderCode);
             return db.ExecuteDataTable(procname);
         }
         //Store edit dữ liệu
@@ -35,7 +54,7 @@ namespace PTHOrder.Class
             return db.ExecuteDataTable(procname);
         }
         //store chèn dữ liệu vào table
-        public bool Insert()
+        public bool Insert(DataTable dtOrderDetail)
         {
             DbAccess db = new DbAccess();
             db.BeginTransaction();
@@ -52,6 +71,32 @@ namespace PTHOrder.Class
                 db.AddParameter("@PaymentConditions", PaymentConditions);
                 db.AddParameter("@VAT", VAT);
                 db.ExecuteNonQueryWithTransaction("tbOrder_Insert");//thực thi store chèn
+                for (int i = 0; i < dtOrderDetail.Rows.Count; i++)
+                {                   
+                    Describe = dtOrderDetail.Rows[i]["Describe"].ToString();
+                    Number = int.Parse(dtOrderDetail.Rows[i]["Number"].ToString());
+                    Unit = dtOrderDetail.Rows[i]["Unit"].ToString();
+                    Price = double.Parse(dtOrderDetail.Rows[i]["Price"].ToString());
+                    if (dtOrderDetail.Rows[i]["Monetize"] == DBNull.Value)
+                    {
+                        Monetize = 0;
+                    }else
+                    {
+                        Monetize = double.Parse(dtOrderDetail.Rows[i]["Monetize"].ToString());
+                    }
+                    SupplierSuggest = dtOrderDetail.Rows[i]["SupplierSuggest"].ToString();
+                    db.CreateNewSqlCommand();
+                    db.AddParameter("@OrderCode", OrderCode);
+                    db.AddParameter("@Describe", Describe);
+                    db.AddParameter("@Number", Number);
+                    db.AddParameter("@Unit", Unit);
+                    db.AddParameter("@Price", Price);
+                    db.AddParameter("@Monetize", Monetize);
+                    db.AddParameter("@SupplierSuggest", SupplierSuggest);
+                    db.ExecuteNonQueryWithTransaction("tbOrderDetail_Insert");
+
+                } 
+
                 db.CommitTransaction();
                 return true;
             }
@@ -62,7 +107,10 @@ namespace PTHOrder.Class
             }
         }
         //Store cập nhật dữ liệu table
-        public bool Update()
+    
+        //update 2
+
+        public bool Update(DataTable dtOrderDetail, DataTable dtOrderDetailTemp)
         {
             DbAccess db = new DbAccess();
             db.BeginTransaction();
@@ -78,8 +126,70 @@ namespace PTHOrder.Class
                 db.AddParameter("@PlaceOfDelivery", PlaceOfDelivery);
                 db.AddParameter("@PaymentConditions", PaymentConditions);
                 db.AddParameter("@VAT", VAT);
-                db.ExecuteNonQueryWithTransaction("tbOrder_Update");//thực thi store cập nhật dữ liệu
-                db.CommitTransaction();
+                db.ExecuteNonQueryWithTransaction("tbOrder_Update");//begin thực thi store cập nhật dữ liệu 
+                for (int i = 0; i < dtOrderDetail.Rows.Count; i++)
+                {
+                    if (dtOrderDetail.Rows[i]["OrderDetailCode"] == DBNull.Value)//dua vao OrderDetailCode de them or sua
+                    {
+                        Describe = dtOrderDetail.Rows[i]["Describe"].ToString();
+                        Number = int.Parse(dtOrderDetail.Rows[i]["Number"].ToString());
+                        Unit = dtOrderDetail.Rows[i]["Unit"].ToString();
+                        Price = double.Parse(dtOrderDetail.Rows[i]["Price"].ToString());
+                        if (dtOrderDetail.Rows[i]["Monetize"] == DBNull.Value)
+                        {
+                            Monetize = 0;
+                        }
+                        else
+                        {
+                            Monetize = double.Parse(dtOrderDetail.Rows[i]["Monetize"].ToString());
+                        }
+                        SupplierSuggest = dtOrderDetail.Rows[i]["SupplierSuggest"].ToString();
+                        db.CreateNewSqlCommand();
+                        db.AddParameter("@OrderCode", OrderCode);
+                        db.AddParameter("@Describe", Describe);
+                        db.AddParameter("@Number", Number);
+                        db.AddParameter("@Unit", Unit);
+                        db.AddParameter("@Price", Price);
+                        db.AddParameter("@Monetize", Monetize);
+                        db.AddParameter("@SupplierSuggest", SupplierSuggest);
+                        db.ExecuteNonQueryWithTransaction("tbOrderDetail_Insert");
+                    }
+                    else
+                    {
+                        OrderDetailCode =int.Parse(dtOrderDetail.Rows[i]["OrderDetailCode"].ToString());
+                        Describe = dtOrderDetail.Rows[i]["Describe"].ToString();
+                        Number = int.Parse(dtOrderDetail.Rows[i]["Number"].ToString());
+                        Unit = dtOrderDetail.Rows[i]["Unit"].ToString();
+                        Price = double.Parse(dtOrderDetail.Rows[i]["Price"].ToString());
+                        if (dtOrderDetail.Rows[i]["Monetize"] == DBNull.Value)
+                        {
+                            Monetize = 0;
+                        }
+                        else
+                        {
+                            Monetize = double.Parse(dtOrderDetail.Rows[i]["Monetize"].ToString());
+                        }
+                        SupplierSuggest = dtOrderDetail.Rows[i]["SupplierSuggest"].ToString();
+                        db.CreateNewSqlCommand();
+                        db.AddParameter("@OrderDetailCode", OrderDetailCode);
+                        db.AddParameter("@Describe", Describe);
+                        db.AddParameter("@Number", Number);
+                        db.AddParameter("@Unit", Unit);
+                        db.AddParameter("@Price", Price);
+                        db.AddParameter("@Monetize", Monetize);
+                        db.AddParameter("@SupplierSuggest", SupplierSuggest);
+                        db.ExecuteNonQueryWithTransaction("tbOrderDetail_Update");
+                    }                    
+                }
+                //xoa het du lieu  bang OrderDetails truyen tu OrderDetailCode bang tam, chi chinh sua moi xoa
+                for (int i = 0; i < dtOrderDetailTemp.Rows.Count; i++)
+                {
+                    OrderDetailCode = int.Parse(dtOrderDetailTemp.Rows[i]["OrderDetailCode"].ToString());
+                    db.CreateNewSqlCommand();
+                    db.AddParameter("@OrderDetailCode", OrderDetailCode);
+                    db.ExecuteNonQueryWithTransaction("tbOrderDetail_Delete");
+                }
+                db.CommitTransaction();//end 
                 return true;
             }
             catch
@@ -87,7 +197,9 @@ namespace PTHOrder.Class
                 db.RollbackTransaction();
                 return false;
             }
+
         }
+        
         //Store xóa dữ liệu table
         public bool Delete()
         {

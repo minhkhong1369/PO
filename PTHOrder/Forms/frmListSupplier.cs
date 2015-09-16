@@ -38,7 +38,7 @@ namespace PTHOrder.Forms
         //Xử lý nút xóa
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (gridItemDetail.FocusedRowHandle > 0)
+            if (gridItemDetail.FocusedRowHandle > -1)
             {
                 string code = gridItemDetail.GetFocusedRowCellValue(colSupplierCode).ToString();
                 Class.clsListSupplier cls = new Class.clsListSupplier();
@@ -67,6 +67,8 @@ namespace PTHOrder.Forms
             }
            
         }
+
+     
        
 
         }

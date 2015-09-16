@@ -189,6 +189,8 @@
             // 
             this.txtTelephone.Location = new System.Drawing.Point(131, 94);
             this.txtTelephone.Name = "txtTelephone";
+            this.txtTelephone.Properties.Mask.EditMask = "(999)000-0000";
+            this.txtTelephone.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Simple;
             this.txtTelephone.Size = new System.Drawing.Size(131, 20);
             this.txtTelephone.TabIndex = 4;
             // 
@@ -196,8 +198,10 @@
             // 
             this.txtMail.Location = new System.Drawing.Point(131, 120);
             this.txtMail.Name = "txtMail";
+            this.txtMail.Properties.Mask.EditMask = "*@*";
             this.txtMail.Size = new System.Drawing.Size(131, 20);
             this.txtMail.TabIndex = 5;
+          
             // 
             // txtGroup
             // 

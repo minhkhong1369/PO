@@ -30,7 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListOrder_Update));
-            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject2 = new DevExpress.Utils.SerializableAppearanceObject();
+            DevExpress.Utils.SerializableAppearanceObject serializableAppearanceObject1 = new DevExpress.Utils.SerializableAppearanceObject();
             this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
@@ -64,8 +64,9 @@
             this.colMonetize = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colOrderCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSupplierSuggest = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.colID = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colOrderDetailCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemTextEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemTextEdit();
+            this.labelControl9 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.txtOrderCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFollowers.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlaceOfDelivery.Properties)).BeginInit();
@@ -178,10 +179,12 @@
             // 
             // txtVAT
             // 
+            this.txtVAT.EditValue = ((short)(10));
             this.txtVAT.Location = new System.Drawing.Point(140, 189);
             this.txtVAT.Name = "txtVAT";
-            this.txtVAT.Size = new System.Drawing.Size(100, 20);
+            this.txtVAT.Size = new System.Drawing.Size(28, 20);
             this.txtVAT.TabIndex = 8;
+            this.txtVAT.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtVAT_KeyPress);
             // 
             // btnSave
             // 
@@ -255,8 +258,9 @@
             this.cboSupplier.Name = "cboSupplier";
             this.cboSupplier.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo),
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "Them", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject2, "", null, null, true)});
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Plus, "Them", -1, true, true, false, DevExpress.XtraEditors.ImageLocation.MiddleCenter, null, new DevExpress.Utils.KeyShortcut(System.Windows.Forms.Keys.None), serializableAppearanceObject1, "", null, null, true)});
             this.cboSupplier.Properties.NullText = "[Vui lòng chọn nhà cung cấp]";
+            this.cboSupplier.Properties.ShowFooter = false;
             this.cboSupplier.Properties.View = this.gridLookUpEdit1View;
             this.cboSupplier.Size = new System.Drawing.Size(234, 20);
             this.cboSupplier.TabIndex = 12;
@@ -317,7 +321,7 @@
             this.colMonetize,
             this.colOrderCode,
             this.colSupplierSuggest,
-            this.colID});
+            this.colOrderDetailCode});
             this.gridItemDetail.GridControl = this.gridItem;
             this.gridItemDetail.IndicatorWidth = 45;
             this.gridItemDetail.Name = "gridItemDetail";
@@ -326,6 +330,9 @@
             this.gridItemDetail.OptionsView.ColumnAutoWidth = false;
             this.gridItemDetail.OptionsView.NewItemRowPosition = DevExpress.XtraGrid.Views.Grid.NewItemRowPosition.Top;
             this.gridItemDetail.OptionsView.ShowGroupPanel = false;
+            this.gridItemDetail.CellValueChanged += new DevExpress.XtraGrid.Views.Base.CellValueChangedEventHandler(this.gridItemDetail_CellValueChanged);
+            this.gridItemDetail.ValidateRow += new DevExpress.XtraGrid.Views.Base.ValidateRowEventHandler(this.gridItemDetail_ValidateRow);
+            this.gridItemDetail.KeyDown += new System.Windows.Forms.KeyEventHandler(this.gridItemDetail_KeyDown);
             // 
             // colDescribe
             // 
@@ -400,11 +407,12 @@
             this.colSupplierSuggest.VisibleIndex = 5;
             this.colSupplierSuggest.Width = 149;
             // 
-            // colID
+            // colOrderDetailCode
             // 
-            this.colID.Caption = "ID";
-            this.colID.FieldName = "ID";
-            this.colID.Name = "colID";
+            this.colOrderDetailCode.Caption = "OrderDetailCode";
+            this.colOrderDetailCode.FieldName = "OrderDetailCode";
+            this.colOrderDetailCode.Name = "colOrderDetailCode";
+            this.colOrderDetailCode.Width = 117;
             // 
             // repositoryItemTextEdit1
             // 
@@ -413,11 +421,20 @@
             this.repositoryItemTextEdit1.Name = "repositoryItemTextEdit1";
             this.repositoryItemTextEdit1.ValidateOnEnterKey = true;
             // 
+            // labelControl9
+            // 
+            this.labelControl9.Location = new System.Drawing.Point(170, 192);
+            this.labelControl9.Name = "labelControl9";
+            this.labelControl9.Size = new System.Drawing.Size(11, 13);
+            this.labelControl9.TabIndex = 14;
+            this.labelControl9.Text = "%";
+            // 
             // frmListOrder_Update
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(664, 453);
+            this.Controls.Add(this.labelControl9);
             this.Controls.Add(this.gridItem);
             this.Controls.Add(this.cboSupplier);
             this.Controls.Add(this.dateDeliveryDate);
@@ -440,7 +457,6 @@
             this.Controls.Add(this.labelControl1);
             this.Name = "frmListOrder_Update";
             this.Text = "frmListOrder_Update";
-            this.Load += new System.EventHandler(this.frmListOrder_Update_Load);
             ((System.ComponentModel.ISupportInitialize)(this.txtOrderCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtFollowers.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtPlaceOfDelivery.Properties)).EndInit();
@@ -497,7 +513,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn colMonetize;
         private DevExpress.XtraGrid.Columns.GridColumn colOrderCode;
         private DevExpress.XtraGrid.Columns.GridColumn colSupplierSuggest;
-        private DevExpress.XtraGrid.Columns.GridColumn colID;
+        private DevExpress.XtraGrid.Columns.GridColumn colOrderDetailCode;
         private DevExpress.XtraEditors.Repository.RepositoryItemTextEdit repositoryItemTextEdit1;
+        private DevExpress.XtraEditors.LabelControl labelControl9;
     }
 }
