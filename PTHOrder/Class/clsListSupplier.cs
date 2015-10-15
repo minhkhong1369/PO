@@ -25,7 +25,7 @@ namespace PTHOrder.Class
             db.CreateNewSqlCommand();
             return db.ExecuteDataTable(procname);
         }
-        //Store edit dữ liệu
+        
         public DataTable tbSupplier_Get()
         {
             string procname = "tbSupplier_Get";

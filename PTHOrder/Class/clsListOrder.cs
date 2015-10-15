@@ -8,7 +8,7 @@ namespace PTHOrder.Class
 {
     class clsListOrder
     {
-        //khai báo biến các Feild của table
+        //khai báo biến các Feild của table tbOrder
         public string OrderCode { get; set; }
         public DateTime DateSuggest { get; set; }
         public string Followers { get; set; }
@@ -16,8 +16,10 @@ namespace PTHOrder.Class
         public DateTime DeliveryDate { get; set; }
         public string PlaceOfDelivery { get; set; }
         public string PaymentConditions { get; set; }
+        public string CurrencyUnit { get; set; }
         public int VAT { get; set; }
-
+        public string Status { get; set; }
+        //khai báo biến các Feild của table tbOrderDetails
         public int OrderDetailCode { get; set; }
         public string Describe { get; set; }
         public int Number { get; set; }
@@ -25,7 +27,7 @@ namespace PTHOrder.Class
         public double Price { get; set; }
         public double Monetize { get; set; }
         public string SupplierSuggest { get; set; }
-       
+        public int Year { get; set; }
 
         //Store lấy dữ liệu table
         public DataTable tbOrder_GetList()
@@ -44,7 +46,23 @@ namespace PTHOrder.Class
             db.AddParameter("@OrderCode", OrderCode);
             return db.ExecuteDataTable(procname);
         }
-        //Store edit dữ liệu
+        public DataTable tbOrderReport_GetByCode()
+        {
+            string procname = "tbOrderReport_GetByCode";
+            DbAccess db = new DbAccess();
+            db.CreateNewSqlCommand();
+            db.AddParameter("@OrderCode", OrderCode);
+            return db.ExecuteDataTable(procname);
+        }
+        public DataTable tbOrder_GetAutocode()
+        {
+            string procname = "tbOrder_GetAutocode";
+            DbAccess db = new DbAccess();
+            db.CreateNewSqlCommand();
+            db.AddParameter("@Year", Year);
+            return db.ExecuteDataTable(procname);
+        }
+       
         public DataTable tbOrder_Get()
         {
             string procname = "tbOrder_Get";
@@ -70,6 +88,7 @@ namespace PTHOrder.Class
                 db.AddParameter("@PlaceOfDelivery", PlaceOfDelivery);
                 db.AddParameter("@PaymentConditions", PaymentConditions);
                 db.AddParameter("@VAT", VAT);
+                db.AddParameter("@CurrencyUnit", CurrencyUnit);
                 db.ExecuteNonQueryWithTransaction("tbOrder_Insert");//thực thi store chèn
                 for (int i = 0; i < dtOrderDetail.Rows.Count; i++)
                 {                   
@@ -126,6 +145,7 @@ namespace PTHOrder.Class
                 db.AddParameter("@PlaceOfDelivery", PlaceOfDelivery);
                 db.AddParameter("@PaymentConditions", PaymentConditions);
                 db.AddParameter("@VAT", VAT);
+                db.AddParameter("@CurrencyUnit", CurrencyUnit);
                 db.ExecuteNonQueryWithTransaction("tbOrder_Update");//begin thực thi store cập nhật dữ liệu 
                 for (int i = 0; i < dtOrderDetail.Rows.Count; i++)
                 {
@@ -181,7 +201,7 @@ namespace PTHOrder.Class
                         db.ExecuteNonQueryWithTransaction("tbOrderDetail_Update");
                     }                    
                 }
-                //xoa het du lieu  bang OrderDetails truyen tu OrderDetailCode bang tam, chi chinh sua moi xoa
+                //xoa het du lieu bang OrderDetails truyen tu OrderDetailCode bang tam, chi chinh sua moi xoa
                 for (int i = 0; i < dtOrderDetailTemp.Rows.Count; i++)
                 {
                     OrderDetailCode = int.Parse(dtOrderDetailTemp.Rows[i]["OrderDetailCode"].ToString());
@@ -220,6 +240,28 @@ namespace PTHOrder.Class
             }
         }
 
+        //Store cập nhật trạng thái
+        public bool UpdateStatus()
+        {
+            DbAccess db = new DbAccess();
+            db.BeginTransaction();
+
+            try
+            {
+                db.CreateNewSqlCommand();
+                db.AddParameter("@OrderCode", OrderCode);
+                db.AddParameter("@Status", Status);
+                
+                db.ExecuteNonQueryWithTransaction("tbOrder_Status");//thực thi store 
+                db.CommitTransaction();
+                return true;
+            }
+            catch
+            {
+                db.RollbackTransaction();
+                return false;
+            }
+        }
     }
 
 

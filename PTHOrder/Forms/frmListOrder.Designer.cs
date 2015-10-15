@@ -41,6 +41,19 @@
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
             this.imageSmall = new DevExpress.Utils.ImageCollection(this.components);
             this.gridItem = new DevExpress.XtraGrid.GridControl();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.btn_Add = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Update = new System.Windows.Forms.ToolStripMenuItem();
+            this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnReport = new System.Windows.Forms.ToolStripMenuItem();
+            this.trạngTháiĐơnHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnChoDuyet = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDaDuyet = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnHuy = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnHoanThanh = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnExportFile = new System.Windows.Forms.ToolStripMenuItem();
             this.gridItemDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colOrderCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colDateSuggest = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -50,9 +63,12 @@
             this.colPlaceOfDelivery = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPaymentConditions = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colVAT = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colSupplierName = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridItem)).BeginInit();
+            this.contextMenuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridItemDetail)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,15 +168,124 @@
             // 
             // gridItem
             // 
+            this.gridItem.ContextMenuStrip = this.contextMenuStrip1;
             this.gridItem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridItem.Location = new System.Drawing.Point(0, 0);
             this.gridItem.MainView = this.gridItemDetail;
-            this.gridItem.MenuManager = this.barManager1;
             this.gridItem.Name = "gridItem";
             this.gridItem.Size = new System.Drawing.Size(746, 317);
             this.gridItem.TabIndex = 4;
             this.gridItem.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridItemDetail});
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btn_Add,
+            this.btn_Update,
+            this.btn_Delete,
+            this.toolStripMenuItem1,
+            this.btnReport,
+            this.trạngTháiĐơnHàngToolStripMenuItem,
+            this.toolStripMenuItem2,
+            this.btnExportFile});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(183, 148);
+            // 
+            // btn_Add
+            // 
+            this.btn_Add.Image = global::PTHOrder.Properties.Resources.Action_LinkUnlink_Link;
+            this.btn_Add.Name = "btn_Add";
+            this.btn_Add.Size = new System.Drawing.Size(182, 22);
+            this.btn_Add.Text = "Thêm ";
+            this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
+            // 
+            // btn_Update
+            // 
+            this.btn_Update.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.btn_Update.Image = global::PTHOrder.Properties.Resources.Action_Edit_12x12;
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(182, 22);
+            this.btn_Update.Text = "Cập nhật";
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Image = global::PTHOrder.Properties.Resources.Action_Delete_12x12;
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(182, 22);
+            this.btn_Delete.Text = "Xóa";
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // toolStripMenuItem1
+            // 
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(179, 6);
+            // 
+            // btnReport
+            // 
+            this.btnReport.Image = global::PTHOrder.Properties.Resources.Action_Printing_Print;
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(182, 22);
+            this.btnReport.Text = "In đơn đặt hàng";
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // trạngTháiĐơnHàngToolStripMenuItem
+            // 
+            this.trạngTháiĐơnHàngToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnChoDuyet,
+            this.btnDaDuyet,
+            this.btnHuy,
+            this.btnHoanThanh});
+            this.trạngTháiĐơnHàngToolStripMenuItem.Image = global::PTHOrder.Properties.Resources.Action_AboutInfo;
+            this.trạngTháiĐơnHàngToolStripMenuItem.Name = "trạngTháiĐơnHàngToolStripMenuItem";
+            this.trạngTháiĐơnHàngToolStripMenuItem.Size = new System.Drawing.Size(182, 22);
+            this.trạngTháiĐơnHàngToolStripMenuItem.Text = "Trạng thái đơn hàng";
+            // 
+            // btnChoDuyet
+            // 
+            this.btnChoDuyet.Image = global::PTHOrder.Properties.Resources.ModelEditor_GoToObject;
+            this.btnChoDuyet.Name = "btnChoDuyet";
+            this.btnChoDuyet.Size = new System.Drawing.Size(137, 22);
+            this.btnChoDuyet.Text = "Chờ duyệt";
+            this.btnChoDuyet.Click += new System.EventHandler(this.btnChoDuyet_Click);
+            // 
+            // btnDaDuyet
+            // 
+            this.btnDaDuyet.Image = global::PTHOrder.Properties.Resources.ModelEditor_GoToObject;
+            this.btnDaDuyet.Name = "btnDaDuyet";
+            this.btnDaDuyet.Size = new System.Drawing.Size(137, 22);
+            this.btnDaDuyet.Text = "Đã duyệt";
+            this.btnDaDuyet.Click += new System.EventHandler(this.btnDaDuyet_Click);
+            // 
+            // btnHuy
+            // 
+            this.btnHuy.Image = global::PTHOrder.Properties.Resources.ModelEditor_GoToObject;
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.Size = new System.Drawing.Size(137, 22);
+            this.btnHuy.Text = "Hủy";
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
+            // 
+            // btnHoanThanh
+            // 
+            this.btnHoanThanh.Image = global::PTHOrder.Properties.Resources.ModelEditor_GoToObject;
+            this.btnHoanThanh.Name = "btnHoanThanh";
+            this.btnHoanThanh.Size = new System.Drawing.Size(137, 22);
+            this.btnHoanThanh.Text = "Hoàn thành";
+            this.btnHoanThanh.Click += new System.EventHandler(this.btnHoanThanh_Click);
+            // 
+            // toolStripMenuItem2
+            // 
+            this.toolStripMenuItem2.Name = "toolStripMenuItem2";
+            this.toolStripMenuItem2.Size = new System.Drawing.Size(179, 6);
+            // 
+            // btnExportFile
+            // 
+            this.btnExportFile.Image = global::PTHOrder.Properties.Resources.Action_Export_ToExcel;
+            this.btnExportFile.Name = "btnExportFile";
+            this.btnExportFile.Size = new System.Drawing.Size(182, 22);
+            this.btnExportFile.Text = "Xuất file excel";
+            this.btnExportFile.Click += new System.EventHandler(this.btnExportFile_Click);
             // 
             // gridItemDetail
             // 
@@ -172,11 +297,16 @@
             this.colDeliveryDate,
             this.colPlaceOfDelivery,
             this.colPaymentConditions,
-            this.colVAT});
+            this.colVAT,
+            this.colSupplierName,
+            this.colStatus});
             this.gridItemDetail.GridControl = this.gridItem;
             this.gridItemDetail.Name = "gridItemDetail";
             this.gridItemDetail.OptionsBehavior.Editable = false;
+            this.gridItemDetail.OptionsSelection.MultiSelect = true;
+            this.gridItemDetail.OptionsView.ColumnAutoWidth = false;
             this.gridItemDetail.OptionsView.ShowGroupPanel = false;
+            this.gridItemDetail.DoubleClick += new System.EventHandler(this.gridItemDetail_DoubleClick);
             // 
             // colOrderCode
             // 
@@ -185,7 +315,7 @@
             this.colOrderCode.Name = "colOrderCode";
             this.colOrderCode.Visible = true;
             this.colOrderCode.VisibleIndex = 0;
-            this.colOrderCode.Width = 100;
+            this.colOrderCode.Width = 102;
             // 
             // colDateSuggest
             // 
@@ -194,7 +324,7 @@
             this.colDateSuggest.Name = "colDateSuggest";
             this.colDateSuggest.Visible = true;
             this.colDateSuggest.VisibleIndex = 1;
-            this.colDateSuggest.Width = 85;
+            this.colDateSuggest.Width = 89;
             // 
             // colFollowers
             // 
@@ -202,16 +332,14 @@
             this.colFollowers.FieldName = "Followers";
             this.colFollowers.Name = "colFollowers";
             this.colFollowers.Visible = true;
-            this.colFollowers.VisibleIndex = 2;
-            this.colFollowers.Width = 85;
+            this.colFollowers.VisibleIndex = 3;
+            this.colFollowers.Width = 160;
             // 
             // colSupplierCode
             // 
             this.colSupplierCode.Caption = "Mã Nhà Cung Cấp";
             this.colSupplierCode.FieldName = "SupplierCode";
             this.colSupplierCode.Name = "colSupplierCode";
-            this.colSupplierCode.Visible = true;
-            this.colSupplierCode.VisibleIndex = 3;
             this.colSupplierCode.Width = 94;
             // 
             // colDeliveryDate
@@ -221,7 +349,7 @@
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.Visible = true;
             this.colDeliveryDate.VisibleIndex = 4;
-            this.colDeliveryDate.Width = 82;
+            this.colDeliveryDate.Width = 145;
             // 
             // colPlaceOfDelivery
             // 
@@ -230,7 +358,7 @@
             this.colPlaceOfDelivery.Name = "colPlaceOfDelivery";
             this.colPlaceOfDelivery.Visible = true;
             this.colPlaceOfDelivery.VisibleIndex = 5;
-            this.colPlaceOfDelivery.Width = 82;
+            this.colPlaceOfDelivery.Width = 145;
             // 
             // colPaymentConditions
             // 
@@ -239,7 +367,7 @@
             this.colPaymentConditions.Name = "colPaymentConditions";
             this.colPaymentConditions.Visible = true;
             this.colPaymentConditions.VisibleIndex = 6;
-            this.colPaymentConditions.Width = 118;
+            this.colPaymentConditions.Width = 209;
             // 
             // colVAT
             // 
@@ -248,7 +376,24 @@
             this.colVAT.Name = "colVAT";
             this.colVAT.Visible = true;
             this.colVAT.VisibleIndex = 7;
-            this.colVAT.Width = 61;
+            this.colVAT.Width = 124;
+            // 
+            // colSupplierName
+            // 
+            this.colSupplierName.Caption = "Nhà Cung Cấp";
+            this.colSupplierName.FieldName = "SupplierName";
+            this.colSupplierName.Name = "colSupplierName";
+            this.colSupplierName.Visible = true;
+            this.colSupplierName.VisibleIndex = 2;
+            this.colSupplierName.Width = 191;
+            // 
+            // colStatus
+            // 
+            this.colStatus.Caption = "Trạng thái";
+            this.colStatus.FieldName = "Status";
+            this.colStatus.Name = "colStatus";
+            this.colStatus.Visible = true;
+            this.colStatus.VisibleIndex = 8;
             // 
             // frmListOrder
             // 
@@ -260,12 +405,14 @@
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frmListOrder";
-            this.Text = "frmListOrder";
+            this.Text = "Danh Sách Đơn Hàng";
             this.Load += new System.EventHandler(this.frmListOrder_Load);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSmall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridItem)).EndInit();
+            this.contextMenuStrip1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridItemDetail)).EndInit();
             this.ResumeLayout(false);
 
@@ -293,5 +440,20 @@
         private DevExpress.XtraBars.BarButtonItem btnAdd;
         private DevExpress.XtraBars.BarButtonItem btnEdit;
         private DevExpress.XtraBars.BarButtonItem btnDelete;
+        private DevExpress.XtraGrid.Columns.GridColumn colSupplierName;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem btn_Add;
+        private System.Windows.Forms.ToolStripMenuItem btn_Update;
+        private System.Windows.Forms.ToolStripMenuItem btn_Delete;
+        private System.Windows.Forms.ToolStripMenuItem trạngTháiĐơnHàngToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem btnChoDuyet;
+        private System.Windows.Forms.ToolStripMenuItem btnDaDuyet;
+        private System.Windows.Forms.ToolStripMenuItem btnHuy;
+        private System.Windows.Forms.ToolStripMenuItem btnHoanThanh;
+        private DevExpress.XtraGrid.Columns.GridColumn colStatus;
+        private System.Windows.Forms.ToolStripMenuItem btnExportFile;
+        private System.Windows.Forms.ToolStripMenuItem btnReport;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
     }
 }

@@ -11,9 +11,11 @@ namespace PTHOrder
 {
     public partial class frmMain : DevExpress.XtraEditors.XtraForm
     {
+       // Forms.frmLogin frmlogin = new Forms.frmLogin();
         public frmMain()
         {
             InitializeComponent();
+           
         }
         // Kiem tra form da mo len hay chua
         public static bool IsFocusForm(Type type, Form frmParent)
@@ -63,5 +65,44 @@ namespace PTHOrder
                 frm.Show();
             } 
         }
+
+        private void btnLogIn_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Forms.frmLogin frmlogin = new Forms.frmLogin();
+            frmlogin.ShowDialog();
+            if (Class.App.UserLogin != null)
+                btnLogIn.Enabled = false;
+            
+        }
+        //tao ham goi botton login cho form khac
+        public void fnc_DisableLoginButton()
+        {
+            btnLogIn.Enabled = false;
+        }
+        //tao ham goi botton login cho form khac c2: goi doi tuong dev
+        public DevExpress.XtraBars.BarButtonItem BtnLogin
+        {
+            get { return btnLogIn; }
+            set { btnLogIn = value; }
+        }
+
+        private void btnLogOut_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Class.App.UserLogin = null;
+            btnLogIn_ItemClick(null, null);
+        }
+
+        private void btnChangePass_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            Forms.frmChangepassword frm = new Forms.frmChangepassword();
+            frm.ShowDialog();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            btnLogIn_ItemClick(null, null);
+        }
+
+       
     }
 }

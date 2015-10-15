@@ -26,7 +26,8 @@ namespace PTHOrder.Forms
             cls.SupplierCode = code;
             DataTable dt = cls.tbSupplier_Get();
             if (dt.Rows.Count > 0) {
-                txtSupplierCode.Text = dt.Rows[0]["SupplierCode"].ToString();
+                txtSupplierCode.Enabled = false;
+                txtSupplierCode.Text = dt.Rows[0]["SupplierCode"].ToString();               
                 txtSupplierName.Text = dt.Rows[0]["SupplierName"].ToString();
                 txtAddress.Text = dt.Rows[0]["Address"].ToString();
                 txtTelephone.Text = dt.Rows[0]["Telephone"].ToString();
@@ -44,23 +45,35 @@ namespace PTHOrder.Forms
 
         private void btnSaveNew_Click(object sender, EventArgs e)
         {
+            Class.clsListSupplier cls = new Class.clsListSupplier();                              
+            
             //Ran buoc du lieu form
             if (txtSupplierCode.Text.Trim() == "")
             {
-                MessageBox.Show("Bạn chưa nhập mã nhà cung cấp");
+               
+                MessageBox.Show("Bạn chưa nhập mã nhà cung cấp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtSupplierCode.Focus();
                 return;
             }
+            
             if (txtSupplierName.Text.Trim() == "")
             {
-                MessageBox.Show("Bạn chưa nhập tên nhà cung cấp");
+                MessageBox.Show("Bạn chưa nhập tên nhà cung cấp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 txtSupplierName.Focus();
                 return;
             }
             if (statusForm)
-            {      
-                
-                Class.clsListSupplier cls = new Class.clsListSupplier();
+            {
+                DataTable dt = cls.tbSupplier_GetList();
+                for (int i = 0; i <= dt.Rows.Count - 1; i++)
+
+                    if (dt.Rows[i]["SupplierCode"].ToString() == txtSupplierCode.Text)
+                    {
+                        MessageBox.Show("Đã tồn tại nhà cung cấp này !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        txtSupplierCode.Focus();
+                        return;
+                    }
+                //Class.clsListSupplier cls = new Class.clsListSupplier();                              
                 cls.SupplierCode = txtSupplierCode.Text;
                 cls.SupplierName = txtSupplierName.Text;
                 cls.Address = txtAddress.Text;
@@ -82,7 +95,7 @@ namespace PTHOrder.Forms
             }
             else
             {
-                Class.clsListSupplier cls = new Class.clsListSupplier();
+                //Class.clsListSupplier cls = new Class.clsListSupplier();
                 cls.SupplierCode = txtSupplierCode.Text;
                 cls.SupplierName = txtSupplierName.Text;
                 cls.Address = txtAddress.Text;
@@ -109,72 +122,82 @@ namespace PTHOrder.Forms
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-
+                 Class.clsListSupplier cls = new Class.clsListSupplier();
                 //Ran buoc du lieu form
                 if (txtSupplierCode.Text.Trim() == "")
                 {
-                    MessageBox.Show("Bạn chưa nhập mã nhà cung cấp");
+                   
+                    MessageBox.Show("Bạn chưa nhập mã nhà cung cấp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtSupplierCode.Focus();
                     return;
                 }
-                if (txtSupplierName.Text.Trim() == "")
-                {
-                    MessageBox.Show("Bạn chưa nhập tên nhà cung cấp");
-                    txtSupplierName.Focus();
-                    return;
-                }
-
-            if (statusForm)
-            {
                 
                
-               
-                Class.clsListSupplier cls = new Class.clsListSupplier();
-                cls.SupplierCode = txtSupplierCode.Text;
-                cls.SupplierName = txtSupplierName.Text;
-                cls.Address = txtAddress.Text;
-                cls.Telephone = txtTelephone.Text;
-                cls.Mail = txtMail.Text;
-                cls.Group = txtGroup.Text;
-                cls.Contact = txtContact.Text;
-                cls.Note = txtNote.Text;
-                if (cls.Insert())
+                if (txtSupplierName.Text.Trim() == "")
                 {
-                    MessageBox.Show("Thêm thành công");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại");
-                }
-            }
-            else
-            {
-                Class.clsListSupplier cls = new Class.clsListSupplier();
-                cls.SupplierCode = txtSupplierCode.Text;
-                cls.SupplierName = txtSupplierName.Text;
-                cls.Address = txtAddress.Text;
-                cls.Telephone = txtTelephone.Text;
-                cls.Mail = txtMail.Text;
-                cls.Group = txtGroup.Text;
-                cls.Contact = txtContact.Text;
-                cls.Note = txtNote.Text;
-                if (cls.Update())
-                {
-                    MessageBox.Show("Sửa thành công");
-                    this.Close();
-                }
-                else
-                {
-                    MessageBox.Show("Sửa thất bại");
-                }
+                    MessageBox.Show("Bạn chưa nhập tên nhà cung cấp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    txtSupplierName.Focus();
+                    return;
+                }           
 
-            }
+                        if (statusForm)
+                        {
+                            DataTable dt = cls.tbSupplier_GetList();
+                            for (int i = 0; i <= dt.Rows.Count - 1; i++)
+
+                                if (dt.Rows[i]["SupplierCode"].ToString() == txtSupplierCode.Text)
+                                {
+                                    MessageBox.Show("Đã tồn tại nhà cung cấp này !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    txtSupplierCode.Focus();
+                                    return;
+                                }
+                            //Class.clsListSupplier cls = new Class.clsListSupplier();
+                            cls.SupplierCode = txtSupplierCode.Text;
+                            cls.SupplierName = txtSupplierName.Text;
+                            cls.Address = txtAddress.Text;
+                            cls.Telephone = txtTelephone.Text;
+                            cls.Mail = txtMail.Text;
+                            cls.Group = txtGroup.Text;
+                            cls.Contact = txtContact.Text;
+                            cls.Note = txtNote.Text;
+                            if (cls.Insert())
+                            {
+                                MessageBox.Show("Thêm thành công");
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Thêm thất bại");
+                            }
+                        }
+                        else
+                        {
+                            // Class.clsListSupplier cls = new Class.clsListSupplier();
+                            cls.SupplierCode = txtSupplierCode.Text;
+                            cls.SupplierName = txtSupplierName.Text;
+                            cls.Address = txtAddress.Text;
+                            cls.Telephone = txtTelephone.Text;
+                            cls.Mail = txtMail.Text;
+                            cls.Group = txtGroup.Text;
+                            cls.Contact = txtContact.Text;
+                            cls.Note = txtNote.Text;
+                            if (cls.Update())
+                            {
+                                MessageBox.Show("Sửa thành công");
+                                this.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Sửa thất bại");
+                            }
+
+                        }                  
         }
 
         void Addnew()
         {
             this.Text = "Thêm mới nhà cung cấp";
+            txtSupplierCode.Enabled = true;
             this.txtSupplierCode.Text = "";
             this.txtSupplierName.Text = "";
             this.txtAddress.Text = "";
@@ -185,12 +208,7 @@ namespace PTHOrder.Forms
             this.txtNote.Text = "";
             this.txtSupplierCode.Focus();
             statusForm = true;
-        }
-
-         
-        
-        
-
+        }         
          
     }
 }
