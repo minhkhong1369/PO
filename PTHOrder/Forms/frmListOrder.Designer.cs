@@ -65,6 +65,7 @@
             this.colVAT = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colSupplierName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.waiting = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::PTHOrder.frmWaiting), true, true);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridItem)).BeginInit();
@@ -301,11 +302,13 @@
             this.colSupplierName,
             this.colStatus});
             this.gridItemDetail.GridControl = this.gridItem;
+            this.gridItemDetail.IndicatorWidth = 45;
             this.gridItemDetail.Name = "gridItemDetail";
             this.gridItemDetail.OptionsBehavior.Editable = false;
             this.gridItemDetail.OptionsSelection.MultiSelect = true;
             this.gridItemDetail.OptionsView.ColumnAutoWidth = false;
             this.gridItemDetail.OptionsView.ShowGroupPanel = false;
+            this.gridItemDetail.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridItemDetail_CustomDrawRowIndicator);
             this.gridItemDetail.DoubleClick += new System.EventHandler(this.gridItemDetail_DoubleClick);
             // 
             // colOrderCode
@@ -315,7 +318,7 @@
             this.colOrderCode.Name = "colOrderCode";
             this.colOrderCode.Visible = true;
             this.colOrderCode.VisibleIndex = 0;
-            this.colOrderCode.Width = 102;
+            this.colOrderCode.Width = 83;
             // 
             // colDateSuggest
             // 
@@ -333,7 +336,7 @@
             this.colFollowers.Name = "colFollowers";
             this.colFollowers.Visible = true;
             this.colFollowers.VisibleIndex = 3;
-            this.colFollowers.Width = 160;
+            this.colFollowers.Width = 135;
             // 
             // colSupplierCode
             // 
@@ -349,7 +352,7 @@
             this.colDeliveryDate.Name = "colDeliveryDate";
             this.colDeliveryDate.Visible = true;
             this.colDeliveryDate.VisibleIndex = 4;
-            this.colDeliveryDate.Width = 145;
+            this.colDeliveryDate.Width = 107;
             // 
             // colPlaceOfDelivery
             // 
@@ -358,7 +361,7 @@
             this.colPlaceOfDelivery.Name = "colPlaceOfDelivery";
             this.colPlaceOfDelivery.Visible = true;
             this.colPlaceOfDelivery.VisibleIndex = 5;
-            this.colPlaceOfDelivery.Width = 145;
+            this.colPlaceOfDelivery.Width = 176;
             // 
             // colPaymentConditions
             // 
@@ -367,7 +370,7 @@
             this.colPaymentConditions.Name = "colPaymentConditions";
             this.colPaymentConditions.Visible = true;
             this.colPaymentConditions.VisibleIndex = 6;
-            this.colPaymentConditions.Width = 209;
+            this.colPaymentConditions.Width = 112;
             // 
             // colVAT
             // 
@@ -376,7 +379,7 @@
             this.colVAT.Name = "colVAT";
             this.colVAT.Visible = true;
             this.colVAT.VisibleIndex = 7;
-            this.colVAT.Width = 124;
+            this.colVAT.Width = 57;
             // 
             // colSupplierName
             // 
@@ -385,7 +388,7 @@
             this.colSupplierName.Name = "colSupplierName";
             this.colSupplierName.Visible = true;
             this.colSupplierName.VisibleIndex = 2;
-            this.colSupplierName.Width = 191;
+            this.colSupplierName.Width = 148;
             // 
             // colStatus
             // 
@@ -394,6 +397,7 @@
             this.colStatus.Name = "colStatus";
             this.colStatus.Visible = true;
             this.colStatus.VisibleIndex = 8;
+            this.colStatus.Width = 66;
             // 
             // frmListOrder
             // 
@@ -455,5 +459,6 @@
         private System.Windows.Forms.ToolStripMenuItem btnReport;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private DevExpress.XtraSplashScreen.SplashScreenManager waiting;
     }
 }

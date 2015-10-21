@@ -76,7 +76,6 @@ namespace PTHOrder.Forms
             cls.OrderCode = Ordercode;
             dtOrderDetail = cls.tbOrderDetails_GetByCode();
             gridItem.DataSource = dtOrderDetail;
-
             cls.OrderCode = "";
             dtOrderDetailTemp = cls.tbOrderDetails_GetByCode(); 
         }
@@ -373,6 +372,7 @@ namespace PTHOrder.Forms
            }
            
        }
+       //tao cot ma don hang tu dong 
        void AutoOrderCode()
        {
            Class.clsListOrder cls = new Class.clsListOrder();

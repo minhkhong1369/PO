@@ -9,6 +9,7 @@ using DevExpress.XtraEditors;
 using System.IO;
 using DevExpress.XtraReports.UI;
 using Excel = Microsoft.Office.Interop.Excel;
+using DevExpress.XtraGrid.Views.Grid;
 
 
 namespace PTHOrder.Forms
@@ -36,13 +37,16 @@ namespace PTHOrder.Forms
 
         private void btnAdd_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            waiting.ShowWaitForm();
             Forms.frmListOrder_Update frm = new frmListOrder_Update();
             frm.ShowDialog();
             tbOrder_GetList();
+            waiting.CloseWaitForm();
         }
 
         private void btnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            waiting.ShowWaitForm();
             if (gridItemDetail.FocusedRowHandle > -1)
             {
                 string code = gridItemDetail.GetFocusedRowCellValue(colOrderCode).ToString();//lấy Ordercode từ vị trí trên grid
@@ -50,10 +54,12 @@ namespace PTHOrder.Forms
                 frm.ShowDialog();
                 tbOrder_GetList();
             }
+            waiting.CloseWaitForm();
         }
 
         private void btnDelete_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
+            waiting.ShowWaitForm();
             if (gridItemDetail.FocusedRowHandle > -1)//duyệt từ dòng đầu tiên trên lưới
             {
                 string code = gridItemDetail.GetFocusedRowCellValue(colOrderCode).ToString();
@@ -74,6 +80,7 @@ namespace PTHOrder.Forms
                 }
 
             }
+            waiting.CloseWaitForm();
         }
 
         private void btn_Add_Click(object sender, EventArgs e)
@@ -90,8 +97,6 @@ namespace PTHOrder.Forms
         {
             btnDelete_ItemClick(null, null);
         }
-
-       
 
         private void btnChoDuyet_Click(object sender, EventArgs e)
         {
@@ -266,8 +271,7 @@ namespace PTHOrder.Forms
             {
                 MessageBox.Show("Loi " + ex.ToString());
             }
-        }
-    
+        }    
         private void releaseObject(object obj)
         {
             try
@@ -286,10 +290,6 @@ namespace PTHOrder.Forms
                 GC.Collect();
             }
         }
-        
-       
-        
-
 //In đơn đặt hàng ra report
         private void btnReport_Click(object sender, EventArgs e)
         {
@@ -493,10 +493,21 @@ namespace PTHOrder.Forms
                     return "";
                 }
             }
-
-          }
-           
-        }
+        //tao cot stt tren grid
+            bool indicatorIcon = true;
+            private void gridItemDetail_CustomDrawRowIndicator(object sender, DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventArgs e)
+            {
+                GridView view = (GridView)sender;
+                //Check whether the indicator cell belongs to a data row
+                if (e.Info.IsRowIndicator && e.RowHandle >= 0)
+                {
+                    e.Info.DisplayText = (e.RowHandle + 1).ToString();
+                    if (!indicatorIcon)
+                        e.Info.ImageIndex = -1;
+                }
+            }
+          }          
+ }
 
        
     

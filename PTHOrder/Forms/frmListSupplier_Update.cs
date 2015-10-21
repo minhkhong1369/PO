@@ -14,14 +14,14 @@ namespace PTHOrder.Forms
         public frmListSupplier_Update()
         {
             InitializeComponent();
-            statusForm = true;
+            statusForm = true;//form o tinh trang them moi
             this.Text = "Thêm mới nhà cung cấp";
         }
         bool statusForm= true;
         public frmListSupplier_Update(string code)
         {
             InitializeComponent();
-            statusForm = false;
+            statusForm = false;//form o tinh trang update
             Class.clsListSupplier cls = new Class.clsListSupplier();
             cls.SupplierCode = code;
             DataTable dt = cls.tbSupplier_Get();
@@ -115,9 +115,7 @@ namespace PTHOrder.Forms
                     return;
                 }
             }
-
             Addnew();
-
         }
 
         private void btnSave_Click(object sender, EventArgs e)
@@ -125,21 +123,17 @@ namespace PTHOrder.Forms
                  Class.clsListSupplier cls = new Class.clsListSupplier();
                 //Ran buoc du lieu form
                 if (txtSupplierCode.Text.Trim() == "")
-                {
-                   
+                {  
                     MessageBox.Show("Bạn chưa nhập mã nhà cung cấp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtSupplierCode.Focus();
                     return;
-                }
-                
-               
+                } 
                 if (txtSupplierName.Text.Trim() == "")
                 {
                     MessageBox.Show("Bạn chưa nhập tên nhà cung cấp.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     txtSupplierName.Focus();
                     return;
                 }           
-
                         if (statusForm)
                         {
                             DataTable dt = cls.tbSupplier_GetList();
@@ -193,7 +187,6 @@ namespace PTHOrder.Forms
 
                         }                  
         }
-
         void Addnew()
         {
             this.Text = "Thêm mới nhà cung cấp";

@@ -55,6 +55,7 @@
             this.btn_Update = new System.Windows.Forms.ToolStripMenuItem();
             this.btn_Delete = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExportFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.waiting = new DevExpress.XtraSplashScreen.SplashScreenManager(this, typeof(global::PTHOrder.frmWaiting), true, true);
             ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.imageSmall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridItemDetail)).BeginInit();
@@ -169,11 +170,13 @@
             this.colNote});
             this.gridItemDetail.CustomizationFormBounds = new System.Drawing.Rectangle(126, 294, 216, 178);
             this.gridItemDetail.GridControl = this.gridItem;
+            this.gridItemDetail.IndicatorWidth = 45;
             this.gridItemDetail.Name = "gridItemDetail";
             this.gridItemDetail.OptionsBehavior.Editable = false;
             this.gridItemDetail.OptionsView.ShowGroupPanel = false;
             this.gridItemDetail.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
             new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.colGroup, DevExpress.Data.ColumnSortOrder.Descending)});
+            this.gridItemDetail.CustomDrawRowIndicator += new DevExpress.XtraGrid.Views.Grid.RowIndicatorCustomDrawEventHandler(this.gridItemDetail_CustomDrawRowIndicator);
             this.gridItemDetail.DoubleClick += new System.EventHandler(this.gridItemDetail_DoubleClick);
             // 
             // colSupplierCode
@@ -183,7 +186,7 @@
             this.colSupplierCode.Name = "colSupplierCode";
             this.colSupplierCode.Visible = true;
             this.colSupplierCode.VisibleIndex = 0;
-            this.colSupplierCode.Width = 111;
+            this.colSupplierCode.Width = 72;
             // 
             // colSupplierName
             // 
@@ -192,7 +195,7 @@
             this.colSupplierName.Name = "colSupplierName";
             this.colSupplierName.Visible = true;
             this.colSupplierName.VisibleIndex = 1;
-            this.colSupplierName.Width = 155;
+            this.colSupplierName.Width = 144;
             // 
             // colAddress
             // 
@@ -201,7 +204,7 @@
             this.colAddress.Name = "colAddress";
             this.colAddress.Visible = true;
             this.colAddress.VisibleIndex = 2;
-            this.colAddress.Width = 157;
+            this.colAddress.Width = 161;
             // 
             // colTelephone
             // 
@@ -210,7 +213,7 @@
             this.colTelephone.Name = "colTelephone";
             this.colTelephone.Visible = true;
             this.colTelephone.VisibleIndex = 3;
-            this.colTelephone.Width = 115;
+            this.colTelephone.Width = 117;
             // 
             // colMail
             // 
@@ -219,7 +222,7 @@
             this.colMail.Name = "colMail";
             this.colMail.Visible = true;
             this.colMail.VisibleIndex = 4;
-            this.colMail.Width = 165;
+            this.colMail.Width = 126;
             // 
             // colGroup
             // 
@@ -228,7 +231,7 @@
             this.colGroup.Name = "colGroup";
             this.colGroup.Visible = true;
             this.colGroup.VisibleIndex = 5;
-            this.colGroup.Width = 87;
+            this.colGroup.Width = 68;
             // 
             // colContact
             // 
@@ -237,7 +240,7 @@
             this.colContact.Name = "colContact";
             this.colContact.Visible = true;
             this.colContact.VisibleIndex = 6;
-            this.colContact.Width = 169;
+            this.colContact.Width = 216;
             // 
             // colNote
             // 
@@ -246,7 +249,7 @@
             this.colNote.Name = "colNote";
             this.colNote.Visible = true;
             this.colNote.VisibleIndex = 7;
-            this.colNote.Width = 205;
+            this.colNote.Width = 247;
             // 
             // gridItem
             // 
@@ -268,13 +271,13 @@
             this.btn_Delete,
             this.btnExportFile});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(147, 92);
             // 
             // btn_Add
             // 
             this.btn_Add.Image = global::PTHOrder.Properties.Resources.Action_LinkUnlink_Link;
             this.btn_Add.Name = "btn_Add";
-            this.btn_Add.Size = new System.Drawing.Size(152, 22);
+            this.btn_Add.Size = new System.Drawing.Size(146, 22);
             this.btn_Add.Text = "Thêm ";
             this.btn_Add.Click += new System.EventHandler(this.btn_Add_Click);
             // 
@@ -283,7 +286,7 @@
             this.btn_Update.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btn_Update.Image = global::PTHOrder.Properties.Resources.Action_Edit_12x12;
             this.btn_Update.Name = "btn_Update";
-            this.btn_Update.Size = new System.Drawing.Size(152, 22);
+            this.btn_Update.Size = new System.Drawing.Size(146, 22);
             this.btn_Update.Text = "Cập nhật";
             this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
             // 
@@ -291,7 +294,7 @@
             // 
             this.btn_Delete.Image = global::PTHOrder.Properties.Resources.Action_Delete_12x12;
             this.btn_Delete.Name = "btn_Delete";
-            this.btn_Delete.Size = new System.Drawing.Size(152, 22);
+            this.btn_Delete.Size = new System.Drawing.Size(146, 22);
             this.btn_Delete.Text = "Xóa";
             this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
             // 
@@ -299,7 +302,7 @@
             // 
             this.btnExportFile.Image = global::PTHOrder.Properties.Resources.Action_Export_ToExcel;
             this.btnExportFile.Name = "btnExportFile";
-            this.btnExportFile.Size = new System.Drawing.Size(152, 22);
+            this.btnExportFile.Size = new System.Drawing.Size(146, 22);
             this.btnExportFile.Text = "Xuất file excel";
             this.btnExportFile.Click += new System.EventHandler(this.btnExportFile_Click);
             // 
@@ -354,5 +357,6 @@
         private System.Windows.Forms.ToolStripMenuItem btn_Update;
         private System.Windows.Forms.ToolStripMenuItem btn_Delete;
         private System.Windows.Forms.ToolStripMenuItem btnExportFile;
+        private DevExpress.XtraSplashScreen.SplashScreenManager waiting;
     }
 }
